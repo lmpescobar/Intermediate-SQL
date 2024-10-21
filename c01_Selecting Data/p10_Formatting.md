@@ -1,39 +1,55 @@
-### Ejercicio: **Formateo en SQL**
+### Ejercicio: **Formateo de Consultas SQL**
 
 ---
 
 **Descripción**
 
-En este ejercicio aprenderás a corregir código SQL mal escrito para que cumpla con los estándares de estilo adecuados. Es fundamental que el código sea legible y claro, ya que en un entorno profesional, es probable que otras personas necesiten comprender tu código o explicarlo.
+El código SQL debe seguir un formato legible y estructurado para facilitar su comprensión, especialmente en ambientes colaborativos o profesionales. Sin un buen formateo, el código puede ser difícil de entender y mantener.
 
 ---
 
-### **Instrucciones**
+### Instrucciones:
 
-1. **Ajustar el código de ejemplo**: Corrige el código dado para que esté en línea con las mejores prácticas de SQL, según lo discutido en la lección.
+1. Corrige el código proporcionado para que cumpla con los **estándares de formateo** adecuados.
+
+---
+
+#### **Código con mal formateo**:
 
 ```sql
--- Reescribe esta consulta con formato adecuado
-SELECT 
-    person_id, 
-    role 
-FROM 
-    roles 
-LIMIT 
-    10;
+select person_id, role from roles limit 10
 ```
 
 ---
 
-### **Explicación**
+#### **Código con buen formateo**:
 
-1. **Capitalización de palabras clave**: 
-   - Las palabras clave **SELECT**, **FROM**, y **LIMIT** están en mayúsculas, lo cual sigue las mejores prácticas y mejora la legibilidad.
+```sql
+-- Reescribe esta consulta
+SELECT person_id, role
+FROM roles
+LIMIT 10;
+```
+
+---
+
+### **Explicación del código**
+
+1. **SELECT person_id, role**  
+   Selecciona las columnas `person_id` y `role` de la tabla.
    
-2. **Separar cada campo seleccionado en una nueva línea**: 
-   - Escribir cada columna en su propia línea hace que sea más fácil agregar o eliminar columnas en futuras modificaciones.
+2. **FROM roles**  
+   Indica que los datos provienen de la tabla `roles`.
+   
+3. **LIMIT 10**  
+   Limita los resultados a las primeras 10 filas.
 
-3. **Indentación y líneas en blanco**:
-   - Utilizar sangría para los campos y separar bloques de código (como las palabras clave y las tablas) en diferentes líneas facilita la lectura y el mantenimiento del código.
+---
 
-Este formato es más claro y sigue las mejores prácticas, lo que lo hace fácil de entender y modificar en el futuro.
+### **Mejoras en el Formateo**
+
+- **Palabras clave en mayúsculas**: Se utiliza mayúsculas en `SELECT`, `FROM` y `LIMIT`, lo cual es una buena práctica en SQL.
+- **Separación en líneas**: Cada palabra clave importante tiene su propia línea para mejorar la legibilidad.
+- **Punto y coma al final**: Añadir un punto y coma al final es recomendable para indicar el final de la consulta y evitar errores en sistemas que lo requieren.
+
+Este es el formato adecuado para escribir consultas SQL claras, manteniendo el código ordenado y fácil de leer para cualquier desarrollador.
