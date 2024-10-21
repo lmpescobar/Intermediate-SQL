@@ -4,103 +4,113 @@
 
 **Introducción**
 
-Bienvenidos a esta masterclass sobre cómo consultar bases de datos utilizando SQL para transformar datos en bruto en valiosos conocimientos. Mi nombre es Jasmin Ludolf y seré su guía en este recorrido. Nuestro objetivo es aprovechar los fundamentos ya adquiridos de SQL para profundizar en la obtención de información y presentar resultados de manera clara y precisa. A lo largo de esta sesión, entenderemos cómo realizar consultas avanzadas que nos permitirán obtener insights claros y útiles.
+Bienvenidos a esta masterclass sobre cómo consultar bases de datos utilizando SQL para transformar datos en bruto en valiosos conocimientos. Mi nombre es Jasmin Ludolf, y seré su guía en este recorrido. Nuestro objetivo es profundizar en el uso de SQL para obtener insights y presentar los resultados de manera clara y precisa. A lo largo de esta sesión, aprenderemos a realizar consultas avanzadas que nos permitirán extraer información útil y accionable.
 
 ---
 
 ### **Mapa del Curso: Entendiendo el Poder de las Consultas SQL**
 
-Si bien SQL se puede utilizar para crear y modificar bases de datos, el enfoque de esta masterclass será **consultar** bases de datos. Una **consulta** es una solicitud de datos a una base de datos, y aquí aprenderemos cómo ejecutar consultas de manera eficiente utilizando diversas palabras clave.
+Aunque SQL puede ser usado para crear y modificar bases de datos, el enfoque de esta clase será **consultar** bases de datos. Una **consulta** es una solicitud de información, y aquí aprenderemos a ejecutar consultas de forma eficiente usando varias palabras clave.
 
-En el transcurso de esta clase, veremos cómo:
-1. **Contar registros** y visualizarlos de acuerdo con lo que necesitemos.
-2. Resolver errores comunes en SQL.
-3. Seguir las mejores **guías de estilo** en nuestras consultas.
-4. Filtrar y agrupar datos de manera efectiva.
-5. Aplicar **funciones agregadas** para realizar cálculos sobre múltiples registros.
+Durante esta clase, aprenderemos a:
 
-Además, usaremos **PostgreSQL** como sistema gestor de bases de datos a lo largo del curso.
+1. **Contar registros** y visualizarlos según nuestras necesidades.
+2. Evitar errores comunes en SQL.
+3. Aplicar las mejores **prácticas de estilo** en nuestras consultas.
+4. **Filtrar** y **agrupar** datos de forma efectiva.
+5. Usar **funciones agregadas** para calcular valores sobre múltiples registros.
+
+Usaremos **PostgreSQL** como el sistema gestor de bases de datos para realizar todas nuestras consultas.
 
 ---
 
 ### **Nuestra Base de Datos de Películas**
 
-Para ilustrar los conceptos, trabajaremos con una base de datos que contiene cuatro tablas:
+Para ilustrar los conceptos, trabajaremos con una base de datos que contiene cuatro tablas principales:
 - **films** (películas),
 - **reviews** (reseñas),
 - **people** (personas),
 - **roles** (roles).
 
-La **estructura de nuestra base de datos** incluye los nombres de las tablas, los campos, y los tipos de datos. Esta visión nos permite comprender qué datos están disponibles y cómo podemos acceder a ellos de manera organizada.
+La **estructura de nuestra base de datos** está claramente definida, lo que nos permitirá comprender los datos disponibles y cómo acceder a ellos de manera eficiente.
 
 ---
 
-### **Función COUNT(): Contando Registros de una Tabla**
+### **Función COUNT(): Contando Registros en una Tabla**
 
-Ahora, profundicemos en una de las funciones más útiles en SQL: **COUNT()**. Esta función nos permite contar el número de registros que contienen un valor en un campo determinado.
+La función **COUNT()** es esencial para contar el número de registros en una tabla. Nos dice cuántos valores existen en un campo determinado.
 
-Ejemplo: Si queremos contar cuántas fechas de nacimiento tenemos en la tabla **people**, utilizamos la consulta:
+Por ejemplo, para contar cuántas fechas de nacimiento hay en la tabla **people**, podemos usar la siguiente consulta:
 
 ```sql
-SELECT COUNT(birthdate) AS count_birthdates FROM people;
+SELECT COUNT(birthdate) AS count_birthdates
+FROM people;
 ```
 
-El resultado de esta consulta nos indica que tenemos **6152 fechas de nacimiento** en la tabla. Observa cómo hemos utilizado el alias **"count_birthdates"** para mejorar la legibilidad de los resultados.
+El resultado nos indica que hay **6152 fechas de nacimiento** registradas. En este caso, hemos usado el alias **"count_birthdates"** para hacer más legible el resultado.
 
 ---
 
 ### **Contando Múltiples Campos con COUNT()**
 
-¿Qué sucede si queremos contar más de un campo? Podemos usar la función COUNT en múltiples ocasiones dentro de la misma consulta. Por ejemplo, podemos contar tanto los nombres como las fechas de nacimiento en la tabla **people**:
+Si queremos contar más de un campo en una sola consulta, podemos usar **COUNT** en varias ocasiones. Por ejemplo, para contar tanto los nombres como las fechas de nacimiento en la tabla **people**, usamos:
 
 ```sql
-SELECT COUNT(name), COUNT(birthdate) FROM people;
+SELECT COUNT(name), COUNT(birthdate)
+FROM people;
 ```
 
-Este enfoque nos proporciona dos resultados en una sola consulta.
+Este enfoque nos devuelve dos resultados en una sola consulta, lo que es muy útil para obtener múltiples métricas al mismo tiempo.
 
 ---
 
 ### **Contando Todos los Registros con COUNT(*)**
 
-Usar COUNT con un nombre de campo específico nos indica cuántos valores hay en ese campo. Sin embargo, si queremos **contar el total de registros en una tabla**, podemos utilizar un asterisco (*) para contar todas las filas:
+Si queremos **contar el total de registros** en una tabla, usamos **COUNT(*)**, donde el asterisco representa todas las filas. 
+
+Por ejemplo:
 
 ```sql
-SELECT COUNT(*) FROM people;
+SELECT COUNT(*)
+FROM people;
 ```
 
-Esta es una manera rápida de obtener el número total de registros en cualquier tabla.
+Esta es una manera rápida de obtener el número total de registros en una tabla, sin importar cuántos campos o valores contenga.
 
 ---
 
 ### **Eliminando Duplicados con DISTINCT**
 
-Muchas veces, nuestros resultados incluirán valores duplicados. Para extraer únicamente los valores únicos, utilizamos la palabra clave **DISTINCT**.
+Cuando los resultados incluyen valores duplicados, podemos utilizar la palabra clave **DISTINCT** para seleccionar solo valores únicos. 
 
-Ejemplo: Si deseamos saber cuántos idiomas únicos se representan en la tabla de películas **films**, utilizamos:
+Por ejemplo, para obtener una lista de todos los idiomas únicos representados en la tabla **films**, usamos:
 
 ```sql
-SELECT DISTINCT(language) FROM films;
+SELECT DISTINCT(language)
+FROM films;
 ```
 
-Esto asegura que no tengamos valores repetidos en los resultados.
+Esto asegura que los resultados no contengan valores repetidos.
 
 ---
 
 ### **Combinando COUNT() con DISTINCT**
 
-Para contar cuántos valores únicos existen en un campo, podemos combinar **COUNT** y **DISTINCT**:
+Para contar el número de valores únicos en un campo, combinamos **COUNT()** con **DISTINCT**. 
+
+Por ejemplo:
 
 ```sql
-SELECT COUNT(DISTINCT birthdate) FROM people;
+SELECT COUNT(DISTINCT birthdate)
+FROM people;
 ```
 
-En este caso, estamos contando cuántas **fechas de nacimiento únicas** existen en la tabla **people**. El número será menor que el conteo total porque algunas personas podrían compartir la misma fecha de nacimiento.
+Esta consulta cuenta cuántas **fechas de nacimiento únicas** existen en la tabla **people**. El resultado será menor que el total de fechas de nacimiento, ya que algunas personas comparten la misma fecha.
 
 ---
 
 ### **Conclusión y Práctica**
 
-Ahora que hemos cubierto cómo utilizar las funciones **COUNT** y **DISTINCT** en SQL, es hora de poner manos a la obra. Recuerden: las funciones agregadas son una herramienta poderosa para resumir y organizar grandes conjuntos de datos. A medida que avanzamos, continuaremos explorando cómo aplicar estos conocimientos para obtener información clara y accionable de nuestras bases de datos.
+Hemos cubierto cómo utilizar las funciones **COUNT()** y **DISTINCT** en SQL para contar registros y eliminar duplicados. Estas funciones son fundamentales para resumir y organizar grandes conjuntos de datos. A medida que avancemos, continuaremos aplicando estos conocimientos para obtener información clara y útil de nuestras bases de datos.
 
 ¡Es hora de practicar y consolidar lo aprendido!
